@@ -13,7 +13,7 @@ Intro Description
 - Image sizes must be web friendly (max 300kb unless rendered in a special vision mode)
 - Don't use `eslint-disable` nor change config files for linting and formatting (except for rare agreed exceptions)
 - Code must be pushed whenever possible, at least once every worked days
-- Make sure code is tested both in dev and build mode before submitting to CI/CD `npm run serve`
+- Make sure code is tested both in dev and build mode before submitting to CI/CD `yarn run serve`
 - Make sure metadata is nice and sweet (favicon, SEO titles/desc, path names...etc.)
 - Path names must be SEO friendly, sluggified localized when needed
 - A website is considered incomplete as long as it's not W3C compliant (or almost compliant). Use the W3C validator.
@@ -33,7 +33,7 @@ Start website in developer mode
 
 ```shell
 cd website-repo-slug-name/
-npm start
+yarn start
 ```
 
 **Important note** When adding dependencies or updating them, use `yarn` and not `npm`
@@ -104,6 +104,6 @@ npm start
   - Other commit types: _build:, chore:, ci:, docs:, style:, refactor:, perf:, test_
 
 - The standard is linted and Husky will prevent commits from going through if it's not compliant
-- Project managers/owners can release satisfying updates and issue version bumps thanks to [standard-version](https://github.com/conventional-changelog/standard-version) by running `npm run release`. This will generate:
+- Project managers/owners can release satisfying updates and issue version bumps thanks to [standard-version](https://github.com/conventional-changelog/standard-version) by running `yarn run release`. This will generate:
 - Appropriate tags based on the conventional commit history
 - An aggregated `CHANGELOG.md` file update.
