@@ -2,11 +2,15 @@ import { AutoComplete, Button, Select } from 'antd';
 import styled from 'styled-components';
 
 import 'antd/dist/antd.min.css';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 interface Props {
   allAlbumsTitle: { value: string }[];
   seachByAlbum: string;
+  seachByPhoto: string;
   setSeachByAlbum: (e: string) => void;
+  setseachByPhoto: (e: string) => void;
   setPerPage: (perPage: number) => void;
   setCurrentPage: (page: number) => void;
 }
@@ -22,20 +26,52 @@ const Container = styled.div`
 const { Option } = Select;
 
 const SearchBar = (props: Props): JSX.Element => {
-  return (
-    <Container className="SearchBar">
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location) {
+      props.setSeachByAlbum('');
+      props.setseachByPhoto('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+
+  function getAutoComplete() {
+    if (location.pathname === '/albums') {
+      return (
+        <AutoComplete
+          value={props.seachByAlbum}
+          placeholder="Search by album"
+          options={props.allAlbumsTitle}
+          onChange={(e) => {
+            props.setCurrentPage(0);
+            props.setSeachByAlbum(e);
+          }}
+          filterOption={(inputValue: string, option: any) =>
+            option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+          }
+        />
+      );
+    }
+
+    return (
       <AutoComplete
-        value={props.seachByAlbum}
-        placeholder="Search by album"
-        options={props.allAlbumsTitle}
+        value={props.seachByPhoto}
+        placeholder="Search by photo"
         onChange={(e) => {
-          props.setCurrentPage(1);
-          props.setSeachByAlbum(e);
+          props.setCurrentPage(0);
+          props.setseachByPhoto(e);
         }}
         filterOption={(inputValue: string, option: any) =>
           option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
         }
       />
+    );
+  }
+
+  return (
+    <Container className="SearchBar">
+      {getAutoComplete()}
       <Select placeholder="Per page" onChange={(e) => props.setPerPage(e)}>
         <Option value={10}>10</Option>
         <Option value={20}>20</Option>

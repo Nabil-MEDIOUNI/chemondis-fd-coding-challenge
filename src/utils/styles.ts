@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Card = styled.div`
@@ -13,6 +12,7 @@ export const Card = styled.div`
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   background-color: #fff;
+  cursor: pointer;
 `;
 
 export const CardMedia = styled.img`
@@ -58,7 +58,10 @@ export const Typography = styled.p`
 `;
 
 export const ErrorMessage = styled.h2`
-  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 export const Section = styled.section`
@@ -68,6 +71,19 @@ export const Section = styled.section`
   justify-content: center;
 `;
 
-export const CardLink = styled(Link)`
+export const StyledBackButton = styled.button`
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background-color: transparent;
+  color: black;
+  font-weight: 500;
   text-decoration: none;
+  margin: 10px;
+  cursor: pointer;
+  :hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 `;

@@ -1,16 +1,23 @@
 export interface AlbumsProps {
-  currentPage: number;
+  currentPage: any;
   setCurrentPage: (page: number) => void;
   perPage: number;
-  dataAlbums: any;
-  dataPhotos: any;
   dataUsers: any;
-  loadingAlbums: any;
-  loadingPhotos: any;
   loadingUsers: any;
-  errorAlbums: any;
-  errorPhotos: any;
   errorUsers: any;
+  dataAlbums: any;
+  setDataAlbums: (dataAlbums: any) => void;
+  loadingAlbums: boolean;
+  errorAlbums: string;
+}
+
+export interface PhotosProps {
+  perPage: number;
+  dataUsers: any;
+  loadingUsers: any;
+  errorUsers: any;
+  dataAlbums: any;
+  seachByPhoto: string;
 }
 
 export interface PaginationProps {
