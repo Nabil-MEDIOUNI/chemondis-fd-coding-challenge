@@ -68,6 +68,9 @@ yarn start
     ├── src
     ├────── assets
     ├────── components
+    ├────── context
+    ├────── interfaces
+    ├────── pages
     ├────── utils
     ├── package.json => WARNING: You must inform project manager on the project group chat when installing extra-dependencies or updating ones
     ├──
