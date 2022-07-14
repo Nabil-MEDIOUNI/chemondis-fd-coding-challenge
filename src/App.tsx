@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Axios from 'axios';
 
-import AlbumPage from './pages/albums';
-import PhotosPage from './pages/photos';
-
 import SearchBar from './components/SearchBar';
 
 import { getUsers } from './redux/actions/user';
+
+const LazyAlbumsPage = React.lazy(() => import('./pages/albums'));
+const LazyPhotosPage = React.lazy(() => import('./pages/photos'));
 
 const App = () => {
   const { dataUsers, loadingUsers, errorUsers } = useSelector(
@@ -72,9 +72,9 @@ const App = () => {
       <Switch>
         <Route
           path="/albums"
-          render={() => {
-            return (
-              <AlbumPage
+          render={() => (
+            <React.Suspense fallback="loading...">
+              <LazyAlbumsPage
                 dataAlbums={searchedAlbums}
                 dataUsers={dataUsers}
                 currentPage={AlbumscurrentPage}
@@ -86,14 +86,14 @@ const App = () => {
                 loadingAlbums={loadingAlbums}
                 errorAlbums={errorAlbums}
               />
-            );
-          }}
+            </React.Suspense>
+          )}
         />
         <Route
           path="/photos/:id"
-          render={() => {
-            return (
-              <PhotosPage
+          render={() => (
+            <React.Suspense fallback="loading...">
+              <LazyPhotosPage
                 dataAlbums={dataAlbums}
                 dataUsers={dataUsers}
                 seachByPhoto={seachByPhoto}
@@ -101,8 +101,8 @@ const App = () => {
                 loadingUsers={loadingUsers}
                 errorUsers={errorUsers}
               />
-            );
-          }}
+            </React.Suspense>
+          )}
         />
         <Redirect to="/albums" />
       </Switch>
