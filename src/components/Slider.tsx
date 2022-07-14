@@ -2,6 +2,8 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { SliderProps } from '../interfaces';
+
 const Container = styled.div`
   background: #fff;
   display: flex;
@@ -37,17 +39,13 @@ const Slider = ({
   setIndexPhoto,
   owner,
   album,
-}) => {
-  const photo = photos?.find(({ id }) => id === photoNumber);
+}: SliderProps) => {
+  const photo = photos?.find(({ id }: any) => id === photoNumber);
 
+  const nextIndex = indexPhoto - 1;
   const onSlideLeftClick = () => {
-    const nextIndex = indexPhoto - 1;
-    if (nextIndex === 0) {
-      setIndexPhoto(photos.length);
-      setPhotoNumber(photos.length);
-    } else if (nextIndex < 0) {
-      setIndexPhoto(photos.length - 1);
-      setPhotoNumber(photos.length);
+    if (nextIndex < 0) {
+      return '';
     } else {
       setIndexPhoto(nextIndex);
       setPhotoNumber(photoNumber - 1);
@@ -56,8 +54,7 @@ const Slider = ({
 
   const onSlideRightClick = () => {
     if (photos.length - 1 === indexPhoto) {
-      setIndexPhoto(1);
-      setPhotoNumber(1);
+      return '';
     } else {
       setIndexPhoto((indexPhoto + 1) % photos.length);
       setPhotoNumber(photoNumber + 1);

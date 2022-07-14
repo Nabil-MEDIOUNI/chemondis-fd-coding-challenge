@@ -20,11 +20,18 @@ export interface PhotosProps {
   seachByPhoto: string;
 }
 
-export interface PaginationProps {
-  dataPerPage: any;
-  totalData: any;
-  paginate: any;
-  currentPage: any;
-  setPage: any;
-  changePage: any;
+export interface ModelProps {
+  onClose: () => void;
+  children: any;
+  isOpen: boolean;
+}
+
+export interface SliderProps {
+  indexPhoto: number;
+  photos: any;
+  photoNumber: number;
+  setPhotoNumber: (photos: any) => void;
+  setIndexPhoto: (photos: number) => void;
+  owner: any;
+  album: any;
 }

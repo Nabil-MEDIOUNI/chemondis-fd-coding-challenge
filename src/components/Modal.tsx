@@ -1,6 +1,6 @@
-import React from 'react';
-import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+import { ModelProps } from '../interfaces';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -8,7 +8,6 @@ const StyledModal = styled.div`
   left: 0;
   z-index: 1050;
   display: flex;
-  transform: ${props => (props.isOpen ? 'translateY(0)' : 'translateX(100%)')};
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -27,21 +26,13 @@ const StyledModalBackdrop = styled.div`
   cursor: pointer;
 `;
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = (props: ModelProps) => {
   return (
-    <>
-      <StyledModal isOpen={isOpen}>
-        {children}
-        <StyledModalBackdrop isOpen={isOpen} onClick={onClose} />
-      </StyledModal>
-    </>
+    <StyledModal>
+      {props.children}
+      <StyledModalBackdrop onClick={props.onClose} />
+    </StyledModal>
   );
-};
-
-Modal.propTypes = {
-  isOpen: PropTypes.bool,
-  onClose: PropTypes.func,
-  children: PropTypes.node
 };
 
 export default Modal;
