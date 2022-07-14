@@ -35,14 +35,14 @@ const Wrapper = styled.section`
   justify-content: center;
 `;
 
-const PhotosPage = ({
+const PhotosPage = <TItem,>({
   dataAlbums,
   perPage,
   dataUsers,
   loadingUsers,
   errorUsers,
   seachByPhoto,
-}: PhotosProps) => {
+}: PhotosProps<TItem>) => {
   const { id }: any = useParams();
 
   const [loadingPhotos, setPhotosLoading] = useState(false);
@@ -90,8 +90,10 @@ const PhotosPage = ({
   const [modalOpen, setModalOpen] = useState(false);
   const [indexPhoto, setIndexPhoto] = useState(0);
 
-  const album = dataAlbums?.find((object: any) => object.id === Number(id));
-  const owner = dataUsers?.find(({ id }: any) => album?.userId === id);
+  const album: any = dataAlbums?.find(
+    (object: any) => object.id === Number(id),
+  );
+  const owner: any = dataUsers?.find(({ id }: any) => album?.userId === id);
 
   const searchedPhotos = dataPhotos?.filter(
     (photo: any) =>

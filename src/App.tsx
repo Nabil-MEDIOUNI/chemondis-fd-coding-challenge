@@ -3,11 +3,12 @@ import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Axios from 'axios';
 
+import AlbumsPage from './pages/albums';
+
 import SearchBar from './components/SearchBar';
 
 import { getUsers } from './redux/actions/user';
 
-const LazyAlbumsPage = React.lazy(() => import('./pages/albums'));
 const LazyPhotosPage = React.lazy(() => import('./pages/photos'));
 
 const App = () => {
@@ -73,20 +74,18 @@ const App = () => {
         <Route
           path="/albums"
           render={() => (
-            <React.Suspense fallback="loading...">
-              <LazyAlbumsPage
-                dataAlbums={searchedAlbums}
-                dataUsers={dataUsers}
-                currentPage={AlbumscurrentPage}
-                perPage={perPage}
-                setCurrentPage={setAlbumsCurrentPage}
-                setDataAlbums={setDataAlbums}
-                loadingUsers={loadingUsers}
-                errorUsers={errorUsers}
-                loadingAlbums={loadingAlbums}
-                errorAlbums={errorAlbums}
-              />
-            </React.Suspense>
+            <AlbumsPage
+              dataAlbums={searchedAlbums}
+              dataUsers={dataUsers}
+              currentPage={AlbumscurrentPage}
+              perPage={perPage}
+              setCurrentPage={setAlbumsCurrentPage}
+              setDataAlbums={setDataAlbums}
+              loadingUsers={loadingUsers}
+              errorUsers={errorUsers}
+              loadingAlbums={loadingAlbums}
+              errorAlbums={errorAlbums}
+            />
           )}
         />
         <Route
