@@ -1,16 +1,26 @@
 import { useEffect, useState } from 'react';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Axios from 'axios';
 
 import AlbumPage from './pages/albums';
 import PhotosPage from './pages/photos';
 
 import SearchBar from './components/SearchBar';
 
-import { getUsers } from './context/apis';
-import useDataFetcher from './context/useFetcher';
-import Axios from 'axios';
+import { getUsers } from './redux/actions/user';
 
 const App = () => {
+  const { dataUsers, loadingUsers, errorUsers } = useSelector(
+    (state: any) => state.userReducer,
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
   const [perPage, setPerPage] = useState(5);
   const [AlbumscurrentPage, setAlbumsCurrentPage] = useState(0);
 
@@ -20,8 +30,6 @@ const App = () => {
 
   const [seachByAlbum, setSeachByAlbum] = useState('');
   const [seachByPhoto, setseachByPhoto] = useState('');
-
-  const [dataUsers, loadingUsers, errorUsers] = useDataFetcher(getUsers);
 
   useEffect(() => {
     const fetchAlbums = async () => {
