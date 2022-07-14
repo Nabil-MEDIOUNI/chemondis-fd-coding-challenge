@@ -1,28 +1,28 @@
-export interface AlbumsProps {
+export interface AlbumsProps<TItem> {
   currentPage: any;
   setCurrentPage: (page: number) => void;
   perPage: number;
-  dataUsers: any;
-  loadingUsers: any;
-  errorUsers: any;
-  dataAlbums: any;
+  dataUsers: TItem[];
+  loadingUsers: boolean;
+  errorUsers: string;
+  dataAlbums: TItem[];
   setDataAlbums: (dataAlbums: any) => void;
   loadingAlbums: boolean;
   errorAlbums: string;
 }
 
-export interface PhotosProps {
+export interface PhotosProps<TItem> {
   perPage: number;
-  dataUsers: any;
-  loadingUsers: any;
-  errorUsers: any;
-  dataAlbums: any;
+  dataUsers: TItem[];
+  loadingUsers: boolean;
+  errorUsers: string;
+  dataAlbums: TItem[];
   seachByPhoto: string;
 }
 
 export interface ModelProps {
   onClose: () => void;
-  children: any;
+  children: React.ReactNode;
   isOpen: boolean;
 }
 
@@ -34,4 +34,14 @@ export interface SliderProps {
   setIndexPhoto: (photos: number) => void;
   owner: any;
   album: any;
+}
+
+export interface SearchBarProps {
+  allAlbumsTitle: { value: string }[];
+  seachByAlbum: string;
+  seachByPhoto: string;
+  setSeachByAlbum: (e: string) => void;
+  setseachByPhoto: (e: string) => void;
+  setPerPage: (perPage: number) => void;
+  setCurrentPage: (page: number) => void;
 }

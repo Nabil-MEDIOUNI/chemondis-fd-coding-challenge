@@ -31,33 +31,25 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Slider = ({
-  indexPhoto,
-  photos,
-  photoNumber,
-  setPhotoNumber,
-  setIndexPhoto,
-  owner,
-  album,
-}: SliderProps) => {
-  const photo = photos?.find(({ id }: any) => id === photoNumber);
+const Slider = (props: SliderProps) => {
+  const photo = props.photos?.find(({ id }: any) => id === props.photoNumber);
 
-  const nextIndex = indexPhoto - 1;
+  const nextIndex = props.indexPhoto - 1;
   const onSlideLeftClick = () => {
     if (nextIndex < 0) {
       return '';
     } else {
-      setIndexPhoto(nextIndex);
-      setPhotoNumber(photoNumber - 1);
+      props.setIndexPhoto(nextIndex);
+      props.setPhotoNumber(props.photoNumber - 1);
     }
   };
 
   const onSlideRightClick = () => {
-    if (photos.length - 1 === indexPhoto) {
+    if (props.photos.length - 1 === props.indexPhoto) {
       return '';
     } else {
-      setIndexPhoto((indexPhoto + 1) % photos.length);
-      setPhotoNumber(photoNumber + 1);
+      props.setIndexPhoto((props.indexPhoto + 1) % props.photos.length);
+      props.setPhotoNumber(props.photoNumber + 1);
     }
   };
 
@@ -69,10 +61,10 @@ const Slider = ({
       <div>
         <div>
           <Typography>
-            Owner: <strong>{owner.name}</strong>
+            Owner: <strong>{props.owner.name}</strong>
           </Typography>
           <Typography>
-            Album: <strong>{album.title}</strong>
+            Album: <strong>{props.album.title}</strong>
           </Typography>
           <Typography>
             Title: <strong>{photo?.title}</strong>

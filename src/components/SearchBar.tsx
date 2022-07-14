@@ -1,19 +1,11 @@
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { AutoComplete, Button, Select } from 'antd';
 import styled from 'styled-components';
 
-import 'antd/dist/antd.min.css';
-import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { SearchBarProps } from '../interfaces';
 
-interface Props {
-  allAlbumsTitle: { value: string }[];
-  seachByAlbum: string;
-  seachByPhoto: string;
-  setSeachByAlbum: (e: string) => void;
-  setseachByPhoto: (e: string) => void;
-  setPerPage: (perPage: number) => void;
-  setCurrentPage: (page: number) => void;
-}
+import 'antd/dist/antd.min.css';
 
 const Container = styled.div`
   display: grid;
@@ -25,7 +17,7 @@ const Container = styled.div`
 
 const { Option } = Select;
 
-const SearchBar = (props: Props): JSX.Element => {
+const SearchBar = (props: SearchBarProps): JSX.Element => {
   const location = useLocation();
 
   useEffect(() => {

@@ -25,7 +25,7 @@ export const Container = styled.div`
   margin-bottom: 8px;
 `;
 
-const AlbumsPage = ({
+const AlbumsPage = <TItem,>({
   dataAlbums,
   dataUsers,
   currentPage,
@@ -36,7 +36,7 @@ const AlbumsPage = ({
   errorUsers,
   loadingAlbums,
   errorAlbums,
-}: AlbumsProps) => {
+}: AlbumsProps<TItem>) => {
   const history = useHistory();
   const [itemOffset, setItemOffset] = useState(0);
   const [pageCount, setPageCount] = useState(0);
